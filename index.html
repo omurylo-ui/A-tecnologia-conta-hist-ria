@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expedição Grão-Pará: História, Cultura e Meio Ambiente</title>
+    <style>
+        :root {
+            --primary: #1b4d3e;
+            --secondary: #2e8b57;
+            --accent: #ffcc00;
+            --dark: #121815;
+            --light: #f4f9f4;
+            --card-bg: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--dark));
+            color: white;
+            padding: 3rem 1rem;
+            text-align: center;
+            border-bottom: 5px solid var(--accent);
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            color: #d1e7dd;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        /* Sistema de Abas Interativas */
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background-color: #ddd;
+            border: none;
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn.active, .tab-btn:hover {
+            background-color: var(--secondary);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Cards e Grids */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border-top: 4px solid var(--secondary);
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card h3 {
+            color: var(--primary);
+            margin-bottom: 0.75rem;
+            font-size: 1.3rem;
+        }
+
+        /* Seção Interativa Extra (Quiz / Radar) */
+        .interactive-box {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        .interactive-box button {
+            background-color: var(--accent);
+            border: none;
+            padding: 10px 20px;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: background 0.2s;
+        }
+
+        .interactive-box button:hover {
+            background-color: #e6b800;
+        }
+
+        #result-display {
+            margin-top: 1rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background-color: var(--dark);
+            color: white;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>🌿 Expedição Grão-Pará</h1>
+        <p>Mapeamento Histórico, Cultural e Ambiental do Território Amazônico</p>
+    </header>
+
+    <div class="container">
+        <!-- Navegação por Abas -->
+        <div class="nav-tabs">
+            <button class="tab-btn active" onclick="openTab(event, 'historica')">⏳ História</button>
+            <button class="tab-btn" onclick="openTab(event, 'cultural')">🎭 Cultura</button>
+            <button class="tab-btn" onclick="openTab(event, 'ambiental')">🌍 Meio Ambiente</button>
+        </div>
+
+        <!-- Conteúdo: História -->
+        <div id="historica" class="tab-content active">
+            <div class="grid">
+                <div class="card">
+                    <h3>O Estado do Grão-Pará</h3>
+                    <p>Historicamente, durante os períodos colonial e imperial, o Grão-Pará foi uma unidade administrativa autônoma com ligações diretas com Lisboa, abrangendo um vasto território estratégico na Amazônia.</p>
+                </div>
+                <div class="card">
+                    <h3>Forte do Presépio (1616)</h3>
+                    <p>O marco inicial da colonização portuguesa na região ocorreu com a fundação de Santa Maria de Belém do Grão-Pará, projetada para assegurar o domínio lusitano na foz do Rio Amazonas.</p>
+                </div>
+                <div class="card">
+                    <h3>Ciclo da Borracha</h3>
+                    <p>No final do século XIX e início do século XX, a extração do látex impulsionou o desenvolvimento urbano e econômico sem precedentes, deixando um legado arquitetônico marcante, como o Teatro da Paz.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Conteúdo: Cultura -->
+        <div id="cultural" class="tab-content">
+            <div class="grid">
+                <div class="card">
+                    <h3>Culinária Ancestral</h3>
+                    <p>A fusão entre heranças indígenas e portuguesas gerou pratos de projeção mundial, como o Pato no Tucupi, o Tacacá e a utilização marcante da maniçoba e da farinha d'água.</p>
+                </div>
+                <div class="card">
+                    <h3>Círio de Nazaré</h3>
+                    <p>Uma das maiores manifestações religiosas do planeta, que une fé, devoção, rituais ribeirinhos e elementos profundos da identidade cultural paraense nas ruas de Belém.</p>
+                </div>
+                <div class="card">
+                    <h3>Ritos e Sabores das Matas</h3>
+                    <p>As chamadas "drogas do sertão" (cacau nativo, urucum, cravo e castanha) estruturaram não apenas o comércio colonial, mas moldaram as práticas alimentares e tradicionais dos povos locais.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Conteúdo: Ambiental -->
+        <div id="ambiental" class="tab-content">
+            <div class="grid">
+                <div class="card">
+                    <h3>A Grande Hidrografia</h3>
+                    <p>O território é moldado pela grandiosidade das águas do Rio Amazonas e de uma malha fluvial complexa que funciona como as veias vitais de toda a biodiversidade continental.</p>
+                </div>
+                <div class="card">
+                    <h3>Manejo e Saberes Tradicionais</h3>
+                    <p>Povos originários e comunidades tradicionais desenvolvem há milênios uma relação de equilíbrio ecológico, fundamentada no manejo sustentável da floresta e dos recursos pesqueiros.</p>
+                </div>
+                <div class="card">
+                    <h3>Desafios Climáticos e Conservação</h3>
+                    <p>A pauta ambiental contemporânea no Grão-Pará exige o combate rigoroso ao desmatamento e a valorização de bioeconomias focadas em manter a floresta em pé.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Seção Interativa para o GitHub -->
+        <div class="interactive-box">
+            <h3>🧭 Radar de Identidade Territorial</h3>
+            <p>Clique no botão abaixo para gerar aleatoriamente um foco de análise deste território para os seus estudos:</p>
+            <button onclick="gerarFoco()">Sortear Elemento</button>
+            <div id="result-display">Pronto para iniciar a exploração.</div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Expedição Grão-Pará | Desenvolvido para portfólio GitHub</p>
+    </footer>
+
+    <script>
+        // Função para trocar as abas
+        function openTab(evt, tabName) {
+            const contents = document.getElementsByClassName("tab-content");
+            for (let i = 0; i < contents.length; i++) {
+                contents[i].classList.remove("active");
+            }
+
+            const buttons = document.getElementsByClassName("tab-btn");
+            for (let i = 0; i < buttons.length; i++) {
+                buttons[i].classList.remove("active");
+            }
+
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.classList.add("active");
+        }
+
+        // Função interativa de sorteio de elementos
+        const elementos = [
+            "Foco Histórico: A autonomia geopolítica do Estado do Grão-Pará na Colônia.",
+            "Foco Cultural: A festividade do Círio de Nazaré e o sincretismo religioso.",
+            "Foco Ambiental: A importância estratégica da bacia amazônica e o manejo das águas.",
+            "Foco Histórico: O impacto econômico e social do Ciclo da Borracha.",
+            "Foco Cultural: A culinária baseada em tucupi, maniçoba e saberes indígenas.",
+            "Foco Ambiental: A resistência e o papel dos povos tradicionais na preservação da floresta."
+        ];
+
+        function gerarFoco() {
+            const randomIndex = Math.floor(Math.random() * elementos.length);
+            document.getElementById("result-display").innerText = elementos[randomIndex];
+        }
+    </script>
+</body>
+</html>
