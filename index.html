@@ -118,7 +118,7 @@
             font-size: 1.3rem;
         }
 
-        /* Seção Interativa Extra (Quiz / Radar) */
+        /* Seção Interativa Extra (Radar) */
         .interactive-box {
             background: white;
             padding: 2rem;
@@ -128,7 +128,7 @@
             margin-top: 2rem;
         }
 
-        .interactive-box button {
+        .interactive-box button, .quiz-container button {
             background-color: var(--accent);
             border: none;
             padding: 10px 20px;
@@ -136,10 +136,10 @@
             border-radius: 5px;
             cursor: pointer;
             margin-top: 1rem;
-            transition: background 0.2s;
+            transition: background 0.2s, transform 0.1s;
         }
 
-        .interactive-box button:hover {
+        .interactive-box button:hover, .quiz-container button:hover {
             background-color: #e6b800;
         }
 
@@ -147,6 +147,88 @@
             margin-top: 1rem;
             font-weight: bold;
             color: var(--primary);
+        }
+
+        /* Estilos do Quiz de 10 Perguntas */
+        .quiz-container {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            max-width: 700px;
+            margin: 0 auto;
+            border-top: 4px solid var(--accent);
+        }
+
+        .quiz-header {
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: var(--secondary);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+
+        .question {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .options-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .options-list li {
+            margin-bottom: 10px;
+        }
+
+        .options-list button {
+            width: 100%;
+            text-align: left;
+            background-color: #f0f4f1;
+            color: var(--dark);
+            border: 1px solid #d0e0d5;
+            padding: 12px 15px;
+            font-size: 1rem;
+            border-radius: 6px;
+        }
+
+        .options-list button:hover:not(:disabled) {
+            background-color: var(--secondary);
+            color: white;
+        }
+
+        .options-list button.correct {
+            background-color: #28a745 !important;
+            color: white !important;
+        }
+
+        .options-list button.wrong {
+            background-color: #dc3545 !important;
+            color: white !important;
+        }
+
+        #next-q-btn {
+            display: none;
+            background-color: var(--primary);
+            color: white;
+            float: right;
+        }
+
+        #next-q-btn:hover {
+            background-color: var(--dark);
+        }
+
+        #quiz-result {
+            text-align: center;
+        }
+
+        #quiz-result h3 {
+            color: var(--primary);
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
         }
 
         footer {
@@ -171,6 +253,7 @@
             <button class="tab-btn active" onclick="openTab(event, 'historica')">⏳ História</button>
             <button class="tab-btn" onclick="openTab(event, 'cultural')">🎭 Cultura</button>
             <button class="tab-btn" onclick="openTab(event, 'ambiental')">🌍 Meio Ambiente</button>
+            <button class="tab-btn" onclick="openTab(event, 'quiz-tab')">❓ Quiz (10 Perguntas)</button>
         </div>
 
         <!-- Conteúdo: História -->
@@ -227,6 +310,24 @@
             </div>
         </div>
 
+        <!-- Conteúdo: Quiz de 10 Perguntas -->
+        <div id="quiz-tab" class="tab-content">
+            <div class="quiz-container">
+                <div id="quiz-body">
+                    <div class="quiz-header" id="quiz-progress">Pergunta 1 de 10</div>
+                    <div class="question" id="quiz-question">Carregando pergunta...</div>
+                    <ul class="options-list" id="quiz-options"></ul>
+                    <button id="next-q-btn" onclick="nextQuestion()">Próxima Pergunta ➔</button>
+                    <div style="clear:both;"></div>
+                </div>
+                <div id="quiz-result" style="display: none;">
+                    <h3>Resultado Final</h3>
+                    <p id="quiz-score-text"></p>
+                    <button onclick="restartQuiz()">Refazer Quiz</button>
+                </div>
+            </div>
+        </div>
+
         <!-- Seção Interativa para o GitHub -->
         <div class="interactive-box">
             <h3>🧭 Radar de Identidade Territorial</h3>
@@ -271,6 +372,128 @@
             const randomIndex = Math.floor(Math.random() * elementos.length);
             document.getElementById("result-display").innerText = elementos[randomIndex];
         }
+
+        // LÓGICA DO QUIZ DE 10 PERGUNTAS
+        const quizData = [
+            {
+                question: "1. Qual marco histórico em 1616 deu início à ocupação colonial portuguesa em Belém do Grão-Pará?",
+                options: ["Construção do Forte do Presépio", "Inauguração do Teatro da Paz", "Tratado de Tordesilhas", "Chegada do Imperador Dom Pedro II"],
+                answer: 0
+            },
+            {
+                question: "2. Qual ciclo econômico promoveu grande enriquecimento e transformação urbana em Belém entre os séculos XIX e XX?",
+                options: ["Ciclo do Ouro", "Ciclo da Borracha", "Ciclo do Café", "Ciclo da Cana-de-Açúcar"],
+                answer: 1
+            },
+            {
+                question: "3. Qual prato da culinária ancestral do Grão-Pará é feito com tucupi, jambu e camarão servido bem quente?",
+                options: ["Maniçoba", "Vatapá", "Tacacá", "Barreado"],
+                answer: 2
+            },
+            {
+                question: "4. Qual é considerada uma das maiores manifestações religiosas do mundo e acontece em Belém do Pará?",
+                options: ["Festa do Sairé", "Círio de Nazaré", "Festa do Divino Espírito Santo", "Bumba Meu Boi"],
+                answer: 1
+            },
+            {
+                question: "5. Durante o período colonial, como eram conhecidas as iguarias nativas como o cacau, cravo e urucum?",
+                options: ["Drogas do Sertão", "Especiarias das Índias", "Riquezas do Equador", "Frutos Coloniais"],
+                answer: 0
+            },
+            {
+                question: "6. Qual é a principal bacia hidrográfica que molda a geografia e a biodiversidade do Grão-Pará?",
+                options: ["Bacia do São Francisco", "Bacia do Paraná", "Bacia do Rio Doce", "Bacia Amazônica"],
+                answer: 3
+            },
+            {
+                question: "7. Por que o Estado do Grão-Pará mantinha uma posição administrativa autônoma na época da Colônia?",
+                options: ["Tinha ligações e rotas diretas com Lisboa", "Não aceitava o idioma português", "Era um país independente", "Não produzia bens comerciais"],
+                answer: 0
+            },
+            {
+                question: "8. Qual importante monumento arquitetônico de Belém foi financiado pela riqueza do Ciclo da Borracha?",
+                options: ["Teatro da Paz", "Palácio dos Bandeirantes", "Cristo Redentor", "Mercado Ver-o-Peso (versão original)"],
+                answer: 0
+            },
+            {
+                question: "9. Qual é uma das estratégias fundamentais para manter a floresta em pé e combater o desmatamento na região?",
+                options: ["Expansão de pastagens", "Bioeconomia e manejo sustentável", "Mineração descontrolada", "Queimadas para plantio"],
+                answer: 1
+            },
+            {
+                question: "10. Os saberes e métodos tradicionais de pesca e cultivo na floresta foram desenvolvidos principalmente por quem?",
+                options: ["Comerciantes europeus", "Povos indígenas e comunidades ribeirinhas", "Mineradores estrangeiros", "Imigrantes do século XXI"],
+                answer: 1
+            }
+        ];
+
+        let currentQIndex = 0;
+        let quizScore = 0;
+
+        function renderQuestion() {
+            const currentQ = quizData[currentQIndex];
+            document.getElementById("quiz-progress").innerText = `Pergunta ${currentQIndex + 1} de ${quizData.length}`;
+            document.getElementById("quiz-question").innerText = currentQ.question;
+            
+            const optionsUl = document.getElementById("quiz-options");
+            optionsUl.innerHTML = "";
+            document.getElementById("next-q-btn").style.display = "none";
+
+            currentQ.options.forEach((option, index) => {
+                const li = document.createElement("li");
+                const btn = document.createElement("button");
+                btn.innerText = option;
+                btn.onclick = () => selectQuizAnswer(index, btn);
+                li.appendChild(btn);
+                optionsUl.appendChild(li);
+            });
+        }
+
+        function selectQuizAnswer(selectedIndex, selectedBtn) {
+            const currentQ = quizData[currentQIndex];
+            const allBtns = document.getElementById("quiz-options").getElementsByTagName("button");
+
+            for (let btn of allBtns) {
+                btn.disabled = true;
+            }
+
+            if (selectedIndex === currentQ.answer) {
+                selectedBtn.classList.add("correct");
+                quizScore++;
+            } else {
+                selectedBtn.classList.add("wrong");
+                allBtns[currentQ.answer].classList.add("correct");
+            }
+
+            document.getElementById("next-q-btn").style.display = "block";
+        }
+
+        function nextQuestion() {
+            currentQIndex++;
+            if (currentQIndex < quizData.length) {
+                renderQuestion();
+            } else {
+                showQuizResult();
+            }
+        }
+
+        function showQuizResult() {
+            document.getElementById("quiz-body").style.display = "none";
+            const resultDiv = document.getElementById("quiz-result");
+            resultDiv.style.display = "block";
+            document.getElementById("quiz-score-text").innerText = `Você acertou ${quizScore} de ${quizData.length} perguntas (${(quizScore/quizData.length)*100}% de aproveitamento)!`;
+        }
+
+        function restartQuiz() {
+            currentQIndex = 0;
+            quizScore = 0;
+            document.getElementById("quiz-result").style.display = "none";
+            document.getElementById("quiz-body").style.display = "block";
+            renderQuestion();
+        }
+
+        // Inicializa o Quiz
+        renderQuestion();
     </script>
 </body>
 </html>
